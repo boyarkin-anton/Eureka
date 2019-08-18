@@ -410,7 +410,7 @@ open class _FieldCell<T> : Cell<T>, UITextFieldDelegate, TextFieldCell where T: 
     private func displayValue(useFormatter: Bool) -> String? {
         guard let v = row.value else { return nil }
         if let formatter = (row as? FormatterConformance)?.formatter, useFormatter {
-            return textField?.isFirstResponder == true ? formatter.editingString(for: v) : formatter.string(for: v)
+            return textField?.isFirstResponder == true ? row.displayValueFor?(v) : formatter.string(for: v)
         }
         return String(describing: v)
     }
